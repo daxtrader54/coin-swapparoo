@@ -5,7 +5,6 @@ import styled from 'styled-components';
 const TD = styled.td`
     border: 1px solid #cccccc;
     width: 290px!important;
-
 `;
 
 
