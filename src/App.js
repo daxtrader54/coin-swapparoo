@@ -1,7 +1,7 @@
 import './App.css';
 import logo from './logo.svg'
 import Coin from './components/Coin/Coin';
-
+import AccountBalance from './components/AccountBalance/AccountBalance'
 
 function App() {
   return (
@@ -12,6 +12,9 @@ function App() {
           Coin Swapparoo
         </h1>
       </header>
+
+      <AccountBalance amount={10000}/>
+
       <table className="Coin-table">
         <thead>
           <tr>
