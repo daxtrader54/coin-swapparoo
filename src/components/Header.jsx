@@ -4,8 +4,9 @@ import styled from 'styled-components'
 
 
 class Header extends Component {
-
+    
     render() {
+
         const NewHeader = styled.header`
             background-color: #282c34;
             min-height: 20vh;

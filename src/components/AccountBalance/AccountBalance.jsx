@@ -10,10 +10,23 @@ const Section = styled.section`
 `;
 
 class AccountBalance extends Component {
+
+    handleBalance = (event) => {
+        event.preventDefault();
+        this.props.handleBalanceToggle();
+        this.props.handleBalanceColumn();
+    };
+       
     render() {
+        const buttonText = this.props.showBalance ? 'Hide Balance' : 'Show Balance';
+        let content = this.props.showBalance ? <>Balance: ${this.props.amount}</> : <></>;
+
         return (
             <Section>
-                Balance: ${this.props.amount}
+                <form action="#" method="POST">
+                    <button onClick={this.handleBalance}>{buttonText}</button>
+                </form>
+                {content}
             </Section>
         );
     }
