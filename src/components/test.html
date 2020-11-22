@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One File Coin Table</title>
+    <style>
+        table{padding:20px;width:80%; max-width:700px; margin:auto;}
+        h1,td{text-align:center;}
+    </style>
+</head>
+<body>
+    <h1>Simple Coin Table</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Coin</th>
+            <th>Symbol</th>
+        </tr>
+        </thead>
+            <tbody id="coin-data">
+        </tbody>
+    </table>
+
+    <div class="js-container"></div>
+</body>
+<footer>
+    <script>
+  let node = document.querySelector('.js-container').innerHTML;
+  Promise.all([
+    axios.get('https://api.coinpaprika.com/v1/tickers/btc-bitcoin'),
+    axios.get('https://api.coinpaprika.com/v1/tickers/xrp-ripple')
+  ]).then(
+    (coinResponses) => {
+      const coins = coinResponses
+      .map( response => `
+      <li>
+        ${response.data.name} (${response.data.symbol}): 
+        ${response.data.quotes['USD'].price}
+      </li>` )
+        .join('');
+        node.innerHTML = `<ol>${coins}</ol>`;
+    }
+  );
+    </script>
+</footer>
+</html>

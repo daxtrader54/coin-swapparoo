@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './AccountBalance.css';
 import styled from 'styled-components';
@@ -9,27 +9,24 @@ const Section = styled.section`
     padding: 1.5rem 0px 1.5rem 5rem;
 `;
 
-class AccountBalance extends Component {
+function AccountBalance (props) {
 
-    handleBalance = (event) => {
+    const handleBalance = (event) => {
         event.preventDefault();
-        this.props.handleBalanceToggle();
-        this.props.handleBalanceColumn();
+        props.handleBalanceToggle();
     };
        
-    render() {
-        const buttonText = this.props.showBalance ? 'Hide Balance' : 'Show Balance';
-        let content = this.props.showBalance ? <>Balance: ${this.props.amount}</> : <></>;
+    const buttonText = props.showBalance ? 'Hide Balance' : 'Show Balance';
+    let content = props.showBalance ? <>Balance: ${props.amount}</> : <></>;
 
-        return (
-            <Section>
-                <form action="#" method="POST">
-                    <button onClick={this.handleBalance}>{buttonText}</button>
-                </form>
-                {content}
-            </Section>
-        );
-    }
+    return (
+        <Section>
+            <form action="#" method="POST">
+                <button onClick={handleBalance}>{buttonText}</button>
+            </form>
+            {content}
+        </Section>
+    );
 }
 
 export default AccountBalance;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Coin from '../Coin/Coin'
 import styled from 'styled-components'
 
@@ -7,36 +7,36 @@ const Table = styled.table `
     display:inline-block;
 `;
 
-class CoinList extends Component {
-    render() {
-        return (
-            <Table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Ticker</th>
-                <th>Price</th>
-                {this.props.showBalance ? <th>Balance</th> : null}
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                this.props.coinData.map( ({name, ticker, price, balance}) => 
-                  <Coin key={ticker} 
-                        handleRefresh = {this.props.handleRefresh}
-                        name = {name} 
-                        ticker={ticker}
-                        showBalance = {this.props.showBalance}
-                        balance={balance}
-                        price ={price}/>
-                  )
-              }
-  
-            </tbody>
-          </Table>
-        );
-    }
+function CoinList (props) {
+    return (
+        <Table>
+        <thead id='thead'>
+          <tr>
+            <th id='name'>Name</th>
+            <th id='ticker'>Ticker</th>
+            <th id='Price'> Price</th>
+            {props.showBalance ? <th>Balance</th> : null}
+            <th id='Actions'>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            props.coinData.map( ({...values}) => 
+                <Coin 
+                  key = {values.key} 
+                  handleRefresh = {props.handleRefresh}
+                  name = {values.name} 
+                  ticker = {values.ticker}
+                  showBalance = {props.showBalance}
+                  balance = {values.balance}
+                  price = {parseFloat(values.price).toFixed(2)}
+                  tickerID = {values.key}
+                />
+              )       
+          }
+        </tbody>
+      </Table>
+    );
 }
 
 export default CoinList;

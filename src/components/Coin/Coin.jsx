@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -7,39 +7,34 @@ const TD = styled.td`
     width: 290px!important;
 `;
 
-class Coin extends Component {
-    constructor(props){
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
+function Coin (props) {
 
-    handleClick(event){
+
+    const handleClick = (event) => {
         //Prevent resubmitting of form
-        event.preventDefault(); // This stops the form from refreshing
-
-        this.props.handleRefresh(this.props.ticker);
+        event.preventDefault();
+        props.handleRefresh(props.tickerID);       
     }
 
-    render(){
-        return(
-        <tr>
-            <TD>{this.props.name}</TD>
-            <TD>{this.props.ticker}</TD>
-            <TD>${this.props.price}</TD>
-            {this.props.showBalance ? <TD>${this.props.balance}</TD> : null}
-            <TD><form action="#" method="POST">
-                    <button onClick={this.handleClick}>Refresh</button>
-                </form>
-            </TD>
-        </tr>
-    );
-}
+    return(
+    <tr>
+        <TD>{props.name}</TD>
+        <TD>{props.ticker}</TD>
+        <TD>${props.price}</TD>
+        {props.showBalance ? <TD>${props.balance}</TD> : null}
+        <TD>
+            <form action="#" method="POST">
+                <button id={props.tickerID} onClick={handleClick}>Refresh</button>
+            </form>
+        </TD>
+    </tr>
+);
+
 }
 
 Coin.propTypes = {
     name: PropTypes.string.isRequired,
-    ticker: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired
+    ticker: PropTypes.string.isRequired
 } 
 
 export default Coin;
